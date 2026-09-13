@@ -2,6 +2,15 @@
 
 All notable changes to xModel Wiring Viewer are documented here.
 
+## [1.0.1] - 2026-09-03
+
+### Fixed
+- Web build now renders at proper size on phone browsers (was missing a
+  viewport meta tag, so mobile browsers shrank the whole page to fit a
+  desktop-width layout)
+- The node 1 start marker ring and the last-node octagon no longer overlap
+  their own number labels
+
 ## [1.0.0] - 2026-08-23
 
 Initial release.

@@ -142,7 +142,8 @@ class WiringPainter extends CustomPainter {
     );
 
     // Mark the last node (end of the wiring chain) with an octagon.
-    final endOctagon = _octagonPath(screen(nodes.last), dotRadius + 7);
+    const endMarkerRadius = dotRadius + 7;
+    final endOctagon = _octagonPath(screen(nodes.last), endMarkerRadius);
     canvas.drawPath(endOctagon, Paint()..style = PaintingStyle.fill..color = portMarkerColor);
     canvas.drawPath(
       endOctagon,
@@ -162,7 +163,11 @@ class WiringPainter extends CustomPainter {
           ),
           textDirection: TextDirection.ltr,
         )..layout();
-        final clearance = n == nodes.first ? startRingRadius + 1.5 : dotRadius + 2;
+        final clearance = switch (n) {
+          _ when n == nodes.first => startRingRadius + 1.5,
+          _ when n == nodes.last => endMarkerRadius + 1.5,
+          _ => dotRadius + 2,
+        };
         tp.paint(canvas, p + Offset(clearance, -tp.height / 2));
       }
     }
